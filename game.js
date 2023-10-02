@@ -19,7 +19,8 @@ const firstPlayerCard = document.querySelector('.first-player-card');
 const secondPlayerCard = document.querySelector('.second-player-card');
 
 const increaseDecrease =document.querySelector('.increase-decrease');
-console.log(increaseDecrease);
+
+const againBtn = document.querySelector('.again-btn');
 
 // console.log(guessOne, guessBtnOne, guessBtnTwo, guessTwo);
 
@@ -32,6 +33,7 @@ let livesTwo = 4;
 
 randomNumberBtn.addEventListener('click', () => {
 randomNumber = Math.round(Math.random() * 100)
+increaseDecrease.innerText = "Secret-Number: ???"
 
 console.log(randomNumber);
 
@@ -45,25 +47,37 @@ guessBtnOne.addEventListener('click', () => {
             livesOneLeft.innerHTML=`Congrats! You are a winner.`;
             livesTwoLeft.innerHTML=`Sorry, you lost.`;
             guessBtnTwo.disabled = true;
+            increaseDecrease.innerText = `Secret-Number: ${randomNumber}`
 
         } else if(parseInt(guessOneInput.value) < randomNumber){
             livesOne --;
             allLives --;
-            livesOneLeft.innerHTML=`You have ${livesOne} lives left.`;
+            guessBtnOne.disabled = true;
+            if(guessBtnTwo.disabled) {guessBtnTwo.disabled = false}
 
+            livesOneLeft.innerHTML=`You have ${livesOne} lives left.`;
             increaseDecrease.innerHTML = `INCREASE Player-2 ! <i class="fa-solid fa-arrow-trend-up fa-2x"></i>`;
         } else if(parseInt(guessOneInput.value) > randomNumber){
             livesOne --;
-            allLives --;    
+            allLives --;
+
+            guessBtnOne.disabled = true;
+            if(guessBtnTwo.disabled) {guessBtnTwo.disabled = false}
+                
             livesOneLeft.innerHTML=`You have ${livesOne} lives left.`;
             increaseDecrease.innerHTML=`DECREASE Player-2 ! <i class="fa-solid fa-arrow-trend-down fa-2x"></i>`;
             }
         if (livesOne === 0) {
-            livesOneLeft.innerHTML=`Sorry Player-1, you are loser.`;}
+            livesOneLeft.innerHTML=`Sorry Player-1, you are loser.`;
+            guessBtnOne.disabled = true;
+            
+            
+        }
    
 });
 
 guessBtnTwo.addEventListener('click', () => { 
+
     if(!parseInt(guessTwoInput.value)){
             alert('Please enter a number.');
     
@@ -73,26 +87,54 @@ guessBtnTwo.addEventListener('click', () => {
             livesTwoLeft.innerHTML=`Congrats! You are a winner.`;
             livesOneLeft.innerHTML=`Sorry, you lost.`;
             guessBtnOne.disabled = true;
+            increaseDecrease.innerText = `Secret-Number: ${randomNumber}`
 
 
         } else if(parseInt(guessTwoInput.value) < randomNumber){
             livesTwo --;
             allLives --;
-            livesTwoLeft.innerHTML=`You have ${livesTwo} lives left.`;
 
+            guessBtnTwo.disabled = true;
+            if(guessBtnOne.disabled) {guessBtnOne.disabled = false}
+
+            livesTwoLeft.innerHTML=`You have ${livesTwo} lives left.`;
+            
             increaseDecrease.innerHTML = `INCREASE Player-1 ! <i class="fa-solid fa-arrow-trend-up fa-2x"></i>`;
         } else if(parseInt(guessTwoInput.value) > randomNumber){
             livesTwo --;
             allLives --;    
+
+            guessBtnTwo.disabled = true;
+            if(guessBtnOne.disabled) {guessBtnOne.disabled = false}
             livesTwoLeft.innerHTML=`You have ${livesTwo} lives left.`;
+           
             increaseDecrease.innerHTML=`DECREASE Player-1 ! <i class="fa-solid fa-arrow-trend-down fa-2x"></i>`;
             }
         if (livesTwo === 0) {
-            livesTwoLeft.innerHTML=`Sorry Player-2, you are loser, too.`;}
+            livesTwoLeft.innerHTML=`Sorry Player-2, you are loser, too.`;
+            guessBtnOne.disabled = true;
+            
+        }
    
 });
 
+
 });
+
+againBtn.onclick = () => {
+livesOne = 4;
+livesOne = 4;
+allLives = 8;
+increaseDecrease.innerText= "Starting...";
+livesOneLeft.innerHTML=`You have 4 lives.`;
+livesTwoLeft.innerText="You have 4 lives.";
+guessBtnOne.disabled = false;
+guessBtnTwo.disabled = false;
+guessOneInput.value = "";
+guessTwoInput.value = "";
+firstPlayerCard.className = 'first-player-card card shadow-lg';
+secondPlayerCard.className = 'first-player-card card shadow-lg';
+};
 
 
 
