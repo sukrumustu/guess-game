@@ -44,6 +44,7 @@ increaseDecrease.innerText = "Secret-Number: ???"
 console.log(randomNumber);
 
 guessBtnOne.addEventListener('click', () => { 
+
     if(!parseInt(guessOneInput.value)){
             alert('Please enter a number.');
     
@@ -54,7 +55,7 @@ guessBtnOne.addEventListener('click', () => {
             livesTwoLeft.innerHTML=`Sorry, you lost.`;
             guessBtnTwo.disabled = true;
             increaseDecrease.innerText = `Secret-Number: ${randomNumber}`;
-            localStorage.setItem('totalScoreOne', Number(totalScoreOne) + 10);
+            localStorage.setItem('totalScoreOne', Number(totalScoreTwo) + 10);
           
             document.querySelector('#total-score-one').innerText = `Total Score = ${totalScoreOne}`;
 
