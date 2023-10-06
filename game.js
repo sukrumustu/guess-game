@@ -30,6 +30,12 @@ let allLives = 8;
 let livesOne = 4;
 let livesTwo = 4;
 
+let totalScoreOne = localStorage.getItem('totalScoreOne') || 0;
+let totalScoreTwo = localStorage.getItem('totalScoreTwo') || 0;
+
+document.querySelector('#total-score-one').innerText = `Total Score = ${totalScoreOne}`;
+document.querySelector('#total-score-two').innerText =`Total Score = ${totalScoreTwo}`;
+
 
 randomNumberBtn.addEventListener('click', () => {
 randomNumber = Math.round(Math.random() * 100)
@@ -47,7 +53,11 @@ guessBtnOne.addEventListener('click', () => {
             livesOneLeft.innerHTML=`Congrats! You are a winner.`;
             livesTwoLeft.innerHTML=`Sorry, you lost.`;
             guessBtnTwo.disabled = true;
-            increaseDecrease.innerText = `Secret-Number: ${randomNumber}`
+            increaseDecrease.innerText = `Secret-Number: ${randomNumber}`;
+            localStorage.setItem('totalScoreOne', Number(totalScoreOne) + 10);
+          
+            document.querySelector('#total-score-one').innerText = `Total Score = ${totalScoreOne}`;
+
 
         } else if(parseInt(guessOneInput.value) < randomNumber){
             livesOne --;
@@ -87,7 +97,9 @@ guessBtnTwo.addEventListener('click', () => {
             livesTwoLeft.innerHTML=`Congrats! You are a winner.`;
             livesOneLeft.innerHTML=`Sorry, you lost.`;
             guessBtnOne.disabled = true;
-            increaseDecrease.innerText = `Secret-Number: ${randomNumber}`
+            increaseDecrease.innerText = `Secret-Number: ${randomNumber}`;
+            localStorage.setItem('totalScoreTwo', Number(totalScoreTwo) + 10);
+            document.querySelector('#total-score-two').innerText = `Total Score = ${totalScoreTwo}`;
 
 
         } else if(parseInt(guessTwoInput.value) < randomNumber){
@@ -138,3 +150,23 @@ secondPlayerCard.className = 'first-player-card card shadow-lg';
 
 
 
+// let a = localStorage.getItem('a') || 0;
+// console.log(a);
+// localStorage.setItem('a', '3');
+// console.log(a);
+
+
+//? bu fonksiyon local storage update edildikten sonra DOM'un render edilmesini sağlayabilir.
+
+// const asyncLocalStorage = {
+//     setItem: function (key, value) {
+//         return Promise.resolve().then(function () {
+//             localStorage.setItem(key, value);
+//         });
+//     },
+//     getItem: function (key) {
+//         return Promise.resolve().then(function () {
+//             return localStorage.getItem(key);
+//         });
+//     }
+// };
