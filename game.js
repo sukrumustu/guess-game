@@ -30,6 +30,8 @@ let allLives = 8;
 let livesOne = 4;
 let livesTwo = 4;
 
+
+let allScoreOne = 0;
 let totalScoreOne = localStorage.getItem('totalScoreOne') || 0;
 let totalScoreTwo = localStorage.getItem('totalScoreTwo') || 0;
 
@@ -55,9 +57,11 @@ guessBtnOne.addEventListener('click', () => {
             livesTwoLeft.innerHTML=`Sorry, you lost.`;
             guessBtnTwo.disabled = true;
             increaseDecrease.innerText = `Secret-Number: ${randomNumber}`;
-            localStorage.setItem('totalScoreOne', Number(totalScoreTwo) + 10);
+
+            allScoreOne += 10;
+            localStorage.setItem('totalScoreOne', allScoreOne);
           
-            document.querySelector('#total-score-one').innerText = `Total Score = ${totalScoreOne}`;
+            document.querySelector('#total-score-one').innerText = `Total Score = ${allScoreOne}`;
 
 
         } else if(parseInt(guessOneInput.value) < randomNumber){
